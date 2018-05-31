@@ -18,7 +18,7 @@ client.on('message', mes => {
 	}
 	if(mes.content == "!fsb stop") {
 		check_service_status.stop();
-		mes.chennel.send('stop check status!');
+		mes.channel.send('stop check status!');
 	}
 });
 
@@ -36,13 +36,14 @@ const check_service_status = new CronJob('*/5 * * * * *', () => {
 					isStopAnyService = true;
 				}
 				if(!isStopAnyService) {
-					console.log("start service");
+					isStopAnyService = true;
+					general_channel.send('サーバー動き出したよ！')
 					check_service_status.stop();
 				}
 			});
 		});
 	},
 	null,
-	true,
+	false,
 	"Asia/Tokyo"
 );
