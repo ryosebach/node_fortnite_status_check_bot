@@ -13,7 +13,7 @@ client.on('ready', async () => {
 
 client.on('message', mes => {
 	if(mes.content == "!fsb start") {
-		cron.check_service_status.start();
+		check_service_status.start();
 		mes.channel.send('start check status!');
 	}
 	if(mes.content == "!fsb stop") {
