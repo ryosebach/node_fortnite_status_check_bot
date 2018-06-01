@@ -15,11 +15,11 @@ client.on('ready', async () => {
 client.on('message', mes => {
 	if(mes.content == "!fsb start") {
 		check_service_status.start();
-		mes.channel.send('start check status!');
+		mes.channel.send('メンテ状況の監視を始めるよ');
 	}
 	if(mes.content == "!fsb stop") {
 		check_service_status.stop();
-		mes.channel.send('stop check status!');
+		mes.channel.send('メンテ状況の監視終わるよー');
 	}
 });
 
@@ -36,12 +36,11 @@ const check_service_status = new CronJob('*/5 * * * * *', () => {
 				if($(this).text().match(/Under Maintenance/)) {
 					isStopAnyService = true;
 				}
-				if(!isStopAnyService) {
-					isStopAnyService = true;
-					general_channel.send('サーバー動き出したよ！')
-					check_service_status.stop();
-				}
 			});
+			if(!isStopAnyService) {
+				general_channel.send('メンテ終わり！Fortnite遊べるよ！')
+				check_service_status.stop();
+			}
 		});
 	},
 	null,
