@@ -29,7 +29,7 @@ client.login(token);
 
 
 
-const check_service_status = new CronJob('*/5 * * * * *', () => {
+const check_service_status = new CronJob('*/3 * * * * *', () => {
 		cheerio_client.fetch('https://status.epicgames.com/', (err, $, res) => {
 			let isStopAnyService = false;
 			$('span.component-status').each(function (idx) {
