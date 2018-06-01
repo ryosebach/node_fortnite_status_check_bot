@@ -8,6 +8,7 @@ let general_channnel;
 
 const client = new Discord.Client();
 client.on('ready', async () => {
+	client.user.setUsername("トイレ工場産のLlamaちゃん");
 	general_channel = await client.channels.find(val => val.name == "general");
 });
 
