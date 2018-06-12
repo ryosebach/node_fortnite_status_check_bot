@@ -29,21 +29,15 @@ client.login(token);
 
 
 
-const check_service_status = new CronJob('*/3 * * * * *', () => {
-		cheerio_client.fetch('https://status.epicgames.com/', (err, $, res) => {
-			let isStopAnyService = false;
-			$('span.component-status').each(function (idx) {
-				if($(this).text().match(/Under Maintenance/)) {
-					isStopAnyService = true;
-				}
-			});
-			if(!isStopAnyService) {
-				general_channel.send('メンテ終わり！Fortnite遊べるよ！')
-				check_service_status.stop();
-			}
-		});
-	},
-	null,
-	false,
-	"Asia/Tokyo"
+const check_service_status = new CronJob('*/3 * * * * *', async () => {
+	const fsInfo = await cheerio_client.fetch("https://status.epicgames.com");
+	const underMainte = await fsInfo.$('span.component-status').filter(() => fsInfo.$(this).text().match(/Under Maintenance/) != null)
+	if(underMainte.length != 0) return
+	general_channel.send('メンテ終わり！Fortnite遊べるよ！')
+	console.log('メンテ終わり！Fortnite遊べるよ！')
+	check_service_status.stop();
+},
+null,
+false,
+"Asia/Tokyo"
 );
