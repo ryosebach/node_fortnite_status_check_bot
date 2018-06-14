@@ -30,8 +30,8 @@ client.login(token);
 
 
 const check_service_status = new CronJob('*/3 * * * * *', async () => {
-	const fsInfo = await cheerio_client.fetch("https://status.epicgames.com");
-	const underMainte = await fsInfo.$('span.component-status').filter(() => fsInfo.$(this).text().match(/Under Maintenance/) != null)
+	const $ = (await cheerio_client.fetch("https://status.epicgames.com")).$
+	const underMainte = await $('span.component-status').filter(function () { return $(this).text().match(/Under Maintenance/)})
 	if(underMainte.length != 0) return
 	general_channel.send('メンテ終わり！Fortnite遊べるよ！')
 	console.log('メンテ終わり！Fortnite遊べるよ！')
