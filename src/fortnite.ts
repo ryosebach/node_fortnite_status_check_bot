@@ -23,6 +23,9 @@ client.on("message", (mes) => {
         replyChannels.delete((mes.channel as TextChannel).id);
         (mes.channel as TextChannel).send("メンテ状況の監視を終わるよ");
     }
+	if (mes.content === "!health") {
+		(mes.channel as TextChannel).send("動作中!");
+	}
 });
 
 const CheckServiceStatus = new cron.CronJob("*/3 * * * * *", async () => {
