@@ -31,7 +31,7 @@ client.on("message", (mes) => {
 const CheckServiceStatus = new cron.CronJob("*/3 * * * * *", async () => {
     const $ = (await cheerio_client.fetch("https://status.epicgames.com")).$;
     const underMainte = await $("span.component-status").filter(function(this: void) {
-        return !$(this).text().match(/Operational/);
+        return !$(this).text().match(/Operational|Degraded Performance/);
     });
     if (underMainte.length !== 0) { return; }
     replyChannels.forEach((channel: TextChannel, id: string) => {
