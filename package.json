@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "pm2 start ./app/fortnite.js --name 'fortnite_bot'",
-    "stop": "pm2 delete fortnite_bot",
+    "stop": "pm2 stop fortnite_bot",
     "lint": "tslint src/**/*.ts --fix",
     "build": "gulp build"
   },
